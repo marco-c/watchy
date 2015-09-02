@@ -1,0 +1,47 @@
+x-layout > header, x-layout > footer{
+    padding: 0;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+* {margin: 0; padding: 0;}
+
+#show-list-outer {
+  margin: 20px;
+}
+
+#show-list {
+  list-style-type: none;
+  width: 100%;
+}
+
+#show-list h3 {
+  font: bold 18px/1.4 Helvetica, Verdana, sans-serif;
+}
+
+#show-list li {
+  padding: 10px;
+  overflow: auto;
+  height: 100%;
+}
+
+#show-list img {
+  height: 150px;
+  width: 100px;
+}
+
+li img {
+  float: left;
+  margin: 0 15px 0 0;
+}
+
+li p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+li:hover {
+  background: #eee;
+  cursor: pointer;
+}

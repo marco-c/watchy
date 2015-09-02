@@ -1,3 +1,16 @@
-Asd
+<ul>
+</ul>
+
+<div id="show-list-outer">
+  <ul id="show-list">
+{{#each model as |show|}}
+    <li>
+      <img src="{{show.images.poster.thumb}}">
+      <h3>{{show.title}}</h3>
+      <p>{{show.overview}}</p>
+    </li>
+{{/each}}
+  </ul>
+</div>
 
 {{outlet}}

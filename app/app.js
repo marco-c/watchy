@@ -5,6 +5,8 @@ import config from './config/environment';
 
 var App;
 
+Ember.TRAKT_API_KEY = 'XXX';
+
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 App = Ember.Application.extend({
