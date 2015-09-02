@@ -7,6 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('series');
+  this.route('series-new');
 });
 
 export default Router;

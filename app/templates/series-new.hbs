@@ -1,0 +1,24 @@
+{{input type="search" value=query placeholder="Search term" id="search-input"}}
+<button {{action search}}>Search</button>
+
+{{#if isSearching}}
+<i class="fa fa-spinner fa-spin fa-5x"></i>
+{{/if}}
+
+{{#if resultCount}}
+<div id="show-list-outer">
+  <ul id="show-list">
+    {{#each results as |show|}}
+      <li {{action "add" show.ids.trakt show.title}}>
+        <img src="{{show.images.poster.thumb}}">
+        <h3>{{show.title}}</h3>
+        <p>{{show.overview}}</p>
+      </li>
+    {{else}}
+      <p>No results</p>
+    {{/each}}
+  </ul>
+</div>
+{{/if}}
+
+{{outlet}}
