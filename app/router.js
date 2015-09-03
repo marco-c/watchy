@@ -8,6 +8,9 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.route('series');
   this.route('series-new');
+  this.route('show');
+  this.route('season');
+  this.route('episode');
 });
 
 export default Router;
