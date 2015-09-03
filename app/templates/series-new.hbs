@@ -11,7 +11,7 @@
     {{#each results as |show|}}
       <li>
         <img src="{{show.images.poster.thumb}}">
-        <h3>{{show.title}}</h3>
+        <h3>{{show.title}} ({{show.rating}})</h3>
         <p>{{show.overview}}</p>
       </li>
       {{#unless show.isInDB}}
