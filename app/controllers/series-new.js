@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+import Series from 'series-manager/models/series';
+
 export default Ember.Controller.extend({
   isSearching: false,
 
@@ -8,6 +10,8 @@ export default Ember.Controller.extend({
 
   search: function(query) {
       var _this = this;
+
+      var series = new Series();
 
       if (this.get('isSearching')) {
           return;
@@ -46,7 +50,15 @@ export default Ember.Controller.extend({
             request.onload = function() {
               console.log(request.response);
               var details = request.response[0].show || request.response[0].movie;
-              resolve(details);
+              _this.store.query("series", { traktID: details.ids.trakt }).then(function(shows) {
+                if (shows.get("length") > 0) {
+                  details.isInDB = true;
+                }
+                resolve(details);
+              }, function(err) {
+                console.log(err);
+                resolve(details);
+              });
             };
 
             request.send();
