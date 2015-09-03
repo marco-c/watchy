@@ -14,7 +14,8 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.2.1",
     "normalize-css": "normalize.css#~3.0.3",
-    "qunit": "~1.18.0"
+    "qunit": "~1.18.0",
+    "localforage": "~1.2.1"
   },
   "resolutions": {
     "font-awesome": "~4.1.0"

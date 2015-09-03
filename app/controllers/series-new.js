@@ -45,8 +45,8 @@ export default Ember.Controller.extend({
 
             request.onload = function() {
               console.log(request.response);
-              var details = request.response[0];
-              resolve(details.show || details.movie);
+              var details = request.response[0].show || request.response[0].movie;
+              resolve(details);
             };
 
             request.send();
@@ -64,9 +64,16 @@ export default Ember.Controller.extend({
           this.search(this.get('query'));
       },
 
-      add: function(traktId, showTitle) {
-          if (window.confirm("Add " + showTitle + " to your list?")) {
-              // TODO: Add show
+      add: function(show) {
+          if (window.confirm("Add " + show.title + " to your list?")) {
+            var series = this.store.createRecord('series', {
+              title: show.title,
+              overview: show.overview,
+              score: 0,
+              image: show.images.poster.thumb,
+              traktID: show.ids.trakt
+            });
+            series.save();
           }
       }
   }

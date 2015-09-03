@@ -9,11 +9,14 @@
 <div id="show-list-outer">
   <ul id="show-list">
     {{#each results as |show|}}
-      <li {{action "add" show.ids.trakt show.title}}>
+      <li>
         <img src="{{show.images.poster.thumb}}">
         <h3>{{show.title}}</h3>
         <p>{{show.overview}}</p>
       </li>
+      {{#unless show.isInDB}}
+      <button {{action "add" show}}><i class="fa fa-plus fa-2x"></i></button>
+      {{/unless}}
     {{else}}
       <p>No results</p>
     {{/each}}
