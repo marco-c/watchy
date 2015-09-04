@@ -20,10 +20,10 @@ export default Ember.Controller.extend({
       this.set('isSearching', true);
 
       return new Promise(function(resolve, reject) {
-        var request = new XMLHttpRequest();
+        var request = new XMLHttpRequest({ mozSystem: true });
         request.responseType = "json";
 
-        request.open('GET', 'https://private-anon-97425823a-trakt.apiary-mock.com/shows/trending');
+        request.open('GET', 'https://api-v2launch.trakt.tv/shows/trending');
 
         request.setRequestHeader('Content-Type', 'application/json');
         request.setRequestHeader('trakt-api-version', '2');
@@ -38,18 +38,18 @@ export default Ember.Controller.extend({
       }).then(function(shows) {
         return Promise.all(shows.map(function(show) {
           return new Promise(function(resolve, reject) {
-            var request = new XMLHttpRequest();
+            var request = new XMLHttpRequest({ mozSystem: true });
             request.responseType = "json";
 
-            request.open('GET', 'https://private-anon-97425823a-trakt.apiary-mock.com/search?id_type=trakt&id=' + show.show.ids.trakt);
+            request.open('GET', 'https://api-v2launch.trakt.tv/shows/' + show.show.ids.trakt + '?extended=full,images');
 
             request.setRequestHeader('Content-Type', 'application/json');
             request.setRequestHeader('trakt-api-version', '2');
-            request.setRequestHeader('trakt-api-key', 'b6ef9e6bad7815daa5d6df6cc236e3b0bf70606483209b404bfa7f7b31133884');
+            request.setRequestHeader('trakt-api-key', Ember.TRAKT_API_KEY);
 
             request.onload = function() {
               console.log(request.response);
-              var details = request.response[0].show || request.response[0].movie;
+              var details = request.response;
               _this.store.query("series", { traktID: details.ids.trakt }).then(function(shows) {
                 if (shows.get("length") > 0) {
                   details.isInDB = true;
@@ -77,15 +77,72 @@ export default Ember.Controller.extend({
       },
 
       add: function(show) {
-          if (window.confirm("Add " + show.title + " to your list?")) {
-            var series = this.store.createRecord('series', {
-              title: show.title,
-              overview: show.overview,
-              score: 0,
-              image: show.images.poster.thumb,
-              traktID: show.ids.trakt
-            });
-            series.save();
+        var _this = this;
+
+        if (window.confirm("Add " + show.title + " to your list?")) {
+          var request = new XMLHttpRequest({ mozSystem: true });
+          request.responseType = "json";
+
+            request.open('GET', 'https://api-v2launch.trakt.tv/shows/' + show.ids.trakt + '/seasons?extended=episodes');
+
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.setRequestHeader('trakt-api-version', '2');
+            request.setRequestHeader('trakt-api-key', Ember.TRAKT_API_KEY);
+
+            request.onload = function() {
+              console.log(request.response);
+
+              var traktSeasons = request.response;
+              var seasonsLeft = traktSeasons.length;
+
+              var seasons = [];
+
+              var allSeasonsAdded = new Promise(function(resolve, reject) {
+                function addSeason(num, episodes) {
+                  var season = _this.store.createRecord('season', {
+                    number: num,
+                    episodes: episodes,
+                  });
+
+                  seasons.push(season);
+
+                  season.save().then(function() {
+                    if (--seasonsLeft === 0) {
+                      resolve();
+                    }
+                  });
+                }
+
+
+                for (var i = 0; i < traktSeasons.length; i++) {
+                  var episodes = [];
+
+                  var traktEpisodes = traktSeasons[i].episodes;
+                  for (var j = 0; j < traktEpisodes.length; j++) {
+                    episodes.push(_this.store.createRecord('episode', {
+                      number: traktEpisodes[j].number,
+                      title: traktEpisodes[j].title,
+                    }));
+                  }
+
+                  Promise.all(episodes.map(function(episode) { return episode.save(); })).then(addSeason.bind(null, traktSeasons[i].number, episodes));
+                }
+              });
+
+              allSeasonsAdded.then(function() {
+                var series = _this.store.createRecord('series', {
+                  title: show.title,
+                  overview: show.overview,
+                  rating: show.rating,
+                  image: show.images.poster.thumb,
+                  traktID: show.ids.trakt,
+                  seasons: seasons,
+                });
+                series.save().then(function() { window.alert("Show added"); });
+              });
+            };
+
+            request.send();
           }
       }
   }
