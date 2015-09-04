@@ -20,6 +20,17 @@
     <script src="assets/vendor.js"></script>
     <script src="assets/series-manager.js"></script>
 
+    <script type="text/javascript">
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("service-worker.js").then(function(registration) {
+          console.log("Service worker registration successful with scope: " + registration.scope);
+          console.log("Service worker is: " + (navigator.serviceWorker.controller ? "controlling" : "not controlling"));
+        }).catch(function(error) {
+          console.log("Service worker registration failed with error: " + error);
+        });
+      }
+    </script>
+
     {{content-for 'body-footer'}}
   </body>
 </html>
