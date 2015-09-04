@@ -6,5 +6,5 @@ export default DS.Model.extend({
   score: DS.attr('number'),
   image: DS.attr('string'), // create a new 'image' DS.Transform
   traktID: DS.attr('number'),
-  seasons: DS.hasMany('season'),
+  seasons: DS.hasMany('season', { async: true }),
 });
