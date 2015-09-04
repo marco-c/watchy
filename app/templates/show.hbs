@@ -1,0 +1,13 @@
+<div id="show-list-outer">
+  <ul id="show-list">
+{{#each model.seasons as |season|}}
+    {{#link-to 'season' model.showID season.number}}
+    <li>
+      <h3>Season {{season.number}}</h3>
+    </li>
+    {{/link-to}}
+{{/each}}
+  </ul>
+</div>
+
+{{outlet}}
