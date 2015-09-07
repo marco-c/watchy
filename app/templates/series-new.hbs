@@ -6,11 +6,11 @@
 {{/if}}
 
 {{#if resultCount}}
-<div id="show-list-outer">
-  <ul id="show-list">
+<div class="show-list-outer">
+  <ul class="show-list">
     {{#each results as |show|}}
       <li>
-        <img src="{{show.images.poster.thumb}}">
+        <img src="{{show.images.poster.thumb}}" class="new-series-list-img">
         <h3>{{show.title}} ({{show.rating}})</h3>
         <p>{{show.overview}}</p>
       </li>

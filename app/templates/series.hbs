@@ -1,14 +1,13 @@
 <ul>
 </ul>
 
-<div id="show-list-outer">
-  <ul id="show-list">
+<div class="show-list-outer">
+  <ul class="show-list">
 {{#each model as |show|}}
     {{#link-to 'show' show.id}}
     <li>
-      <img src="{{show.image}}">
+      <img src="{{show.image}}" class="series-list-img">
       <h3>{{show.title}}</h3>
-      <p>{{show.overview}}</p>
     </li>
     {{/link-to}}
 {{/each}}

@@ -8,35 +8,43 @@ x-layout > header, x-layout > footer{
 
 * {margin: 0; padding: 0;}
 
-#show-list-outer {
+.show-list-outer {
   margin: 20px;
 }
 
-#show-list {
+.show-list {
   list-style-type: none;
   width: 100%;
 }
 
-#show-list h3 {
+.show-list h3 {
   font: bold 18px/1.4 Helvetica, Verdana, sans-serif;
 }
 
-#show-list li {
+.show-list li {
   padding: 10px;
   overflow: auto;
   height: 100%;
 }
 
-#show-list li:hover {
+.show-list li:hover {
   background: #eee;
   cursor: pointer;
 }
 
-#show-list li img {
+.show-list li img {
   float: left;
   margin: 0 15px 0 0;
+}
+
+.show-list .new-series-list-img {
   height: 150px;
   width: 100px;
+}
+
+.show-list .series-list-img {
+  height: 90px;
+  width: 60px;
 }
 
 #show-list li p {
