@@ -4,4 +4,5 @@ export default DS.Model.extend({
   number: DS.attr('number'),
   title: DS.attr('string'),
   watched: DS.attr('boolean', { defaultValue: false }),
+  date: DS.attr('date'),
 });
