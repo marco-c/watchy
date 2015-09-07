@@ -137,6 +137,8 @@ export default Ember.Controller.extend({
                   image: show.images.poster.thumb,
                   traktID: show.ids.trakt,
                   seasons: seasons,
+                  status: show.status,
+                  runtime: show.runtime,
                 });
                 series.save().then(function() { window.alert("Show added"); });
               });
