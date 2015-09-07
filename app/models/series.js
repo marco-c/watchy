@@ -7,4 +7,6 @@ export default DS.Model.extend({
   image: DS.attr('string'), // create a new 'image' DS.Transform
   traktID: DS.attr('number'),
   seasons: DS.hasMany('season', { async: true }),
+  status: DS.attr('string'),
+  runtime: DS.attr('number'),
 });
