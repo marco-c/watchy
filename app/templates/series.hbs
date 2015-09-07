@@ -4,12 +4,14 @@
 <div class="show-list-outer">
   <ul class="show-list">
 {{#each model as |show|}}
-    {{#link-to 'show' show.id}}
     <li>
+      {{#link-to 'show' show.id}}
       <img src="{{show.image}}" class="series-list-img">
       <h3>{{show.title}}</h3>
+      {{/link-to}}
+      <p>{{show.nextEpisodeNumber}} - {{show.nextEpisodeTitle}}</p>
+      <small>{{show.nextEpisodeDate}}</small>
     </li>
-    {{/link-to}}
 {{/each}}
   </ul>
 </div>
