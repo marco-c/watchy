@@ -1,9 +1,19 @@
-x-layout > header, x-layout > footer{
-    padding: 0;
+x-layout > header, x-layout > footer {
     background-color: green;
     color: white;
     font-weight: bold;
     text-align: center;
+    width: 100%;
+}
+
+x-appbar a:link,
+x-appbar a:visited  {
+  color: white;
+  text-decoration: none;
+}
+
+x-appbar i {
+  padding-right: 7px;
 }
 
 * {margin: 0; padding: 0;}
