@@ -15,16 +15,25 @@ export default Ember.Route.extend({
               seasons.forEach(function(season) {
                 episodePromises.push(season.get("episodes").then(function(episodes) {
                   return episodes.find(function(episode) {
-                    return episode.get("watched") === false;
+                    if (episode.get("watched") === false) {
+                      episode.seasonNumber = season.get("number");
+                      return true;
+                    } else {
+                      return false;
+                    }
                   });
                 }));
               });
 
               Promise.all(episodePromises).then(function(episodes) {
                 var episode = episodes.find(episode => episode);
-                show.nextEpisodeNumber = episode.get("number");
-                show.nextEpisodeTitle = episode.get("title");
-                show.nextEpisodeDate = episode.get("date");
+                if (episode) {
+                  show.nextEpisodeText = episode.seasonNumber + "x" + episode.get("number") + " - " + episode.get("title");
+                  show.nextEpisodeDate = episode.get("date");
+                } else {
+                  show.nextEpisodeText = show.get("status");
+                  show.nextEpisodeDate = "";
+                }
                 resolve(show);
               });
             });
