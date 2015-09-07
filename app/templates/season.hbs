@@ -1,12 +1,13 @@
 <div class="show-list-outer">
   <ul class="show-list">
 {{#each model.episodes as |episode|}}
-    {{#link-to 'episode' model.showID model.seasonNumber episode.number }}
     <li>
+      {{#link-to 'episode' model.showID model.seasonNumber episode.number }}
       <h3>Episode {{episode.number}}</h3>
+      {{/link-to}}
       <p>{{episode.title}}</p>
+      <input type="checkbox" checked={{episode.watched}} {{action "mark" episode on="change"}} />
     </li>
-    {{/link-to}}
 {{/each}}
   </ul>
 </div>
