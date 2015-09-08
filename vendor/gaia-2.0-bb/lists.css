@@ -200,7 +200,9 @@ li a:active {
 }
 
 [data-type="list"] [data-type="edit"] li > a {
-  pointer-events: none;
+  /* We want the list to be navigable and editable
+     at the same time */
+  /*pointer-events: none;*/
 }
 
 [data-type="list"] [data-type="edit"] li > a:active:after,
