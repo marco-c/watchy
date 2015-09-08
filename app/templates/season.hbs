@@ -1,15 +1,18 @@
-<div class="show-list-outer">
-  <ul class="show-list">
+<section data-type="list">
+  <ul data-type="edit">
 {{#each model.episodes as |episode|}}
     <li>
+      <label class="pack-checkbox">
+        <input type="checkbox" checked={{episode.watched}} {{action "mark" episode on="change"}} />
+        <span></span>
+      </label>
       {{#link-to 'episode' model.showID model.seasonNumber episode.number }}
-      <h3>Episode {{episode.number}}</h3>
-      {{/link-to}}
+      <p>Episode {{episode.number}}</p>
       <p>{{episode.title}}</p>
-      <input type="checkbox" checked={{episode.watched}} {{action "mark" episode on="change"}} />
+      {{/link-to}}
     </li>
 {{/each}}
-  </ul>
-</div>
+</ul>
+</section>
 
 {{outlet}}
