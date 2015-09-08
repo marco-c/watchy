@@ -23,6 +23,21 @@ module.exports = function(defaults) {
   app.import('bower_components/font-awesome/css/font-awesome.css');
   //app.import('bower_components/normalize-css/normalize.css');
 
+  app.import('vendor/gaia-2.0-bb/lists.css');
+  app.import('vendor/gaia-2.0-bb/switches.css');
+  app.import('vendor/gaia-2.0-bb/switches/images/check/default.png', {
+    destDir: "assets/switches/images/check"
+  });
+  app.import('vendor/gaia-2.0-bb/switches/images/check/default@1.5x.png', {
+    destDir: "assets/switches/images/check"
+  });
+  app.import('vendor/gaia-2.0-bb/switches/images/check/default@2.25x.png', {
+    destDir: "assets/switches/images/check"
+  });
+  app.import('vendor/gaia-2.0-bb/switches/images/check/default@2x.png', {
+    destDir: "assets/switches/images/check"
+  });
+
   app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff', {
     destDir: "fonts",
   });
