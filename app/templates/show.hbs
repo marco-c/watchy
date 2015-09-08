@@ -4,6 +4,7 @@
     <li>
       {{#link-to 'season' model.showID season.number}}
       <p>Season {{season.number}}</p>
+      <progress value="{{season.episodesWatched}}" max="{{season.episodesNum}}"></progress>
       {{/link-to}}
     </li>
 {{/each}}
