@@ -1,5 +1,9 @@
-{{input type="search" value=query placeholder="Search term" id="search-input"}}
-<button {{action search}}>Search</button>
+<form role="search" {{action search on="submit"}}>
+  <p>
+    <input placeholder="Search..." type="text">
+    <button type="reset">Clear</button>
+  </p>
+</form>
 
 {{#if isSearching}}
 <i class="fa fa-spinner fa-spin fa-5x"></i>
@@ -13,10 +17,10 @@
         <img src="{{show.images.poster.thumb}}" class="new-series-list-img">
         <h3>{{show.title}} ({{show.rating}})</h3>
         <p>{{show.overview}}</p>
+        {{#unless show.isInDB}}
+        <button {{action "add" show}}><i class="fa fa-plus fa-2x"></i></button>
+        {{/unless}}
       </li>
-      {{#unless show.isInDB}}
-      <button {{action "add" show}}><i class="fa fa-plus fa-2x"></i></button>
-      {{/unless}}
     {{else}}
       <p>No results</p>
     {{/each}}
