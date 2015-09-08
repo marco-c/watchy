@@ -1,19 +1,19 @@
-<ul>
-</ul>
-
-<div class="show-list-outer">
-  <ul class="show-list">
+<section data-type="list">
+  <ul>
 {{#each model as |show|}}
     <li>
       {{#link-to 'show' show.id}}
-      <img src="{{show.image}}" class="series-list-img">
-      <h3>{{show.title}}</h3>
-      {{/link-to}}
+      <aside class="pack-end">
+        <img src="{{show.image}}" class="series-list-img">
+      </aside>
+
+      <p>{{show.title}}</p>
       <p>{{show.nextEpisodeText}}</p>
-      <small>{{show.nextEpisodeDate}}</small>
+      <small style="font-size:10px">{{show.nextEpisodeDate}}</small>
+      {{/link-to}}
     </li>
 {{/each}}
-  </ul>
-</div>
+</ul>
+</section>
 
 {{outlet}}

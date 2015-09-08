@@ -18,6 +18,11 @@ x-appbar i {
 
 * {margin: 0; padding: 0;}
 
+.series-list-img {
+  height: 90px !important;
+  width: 60px !important;
+}
+
 .show-list-outer {
   margin-top: 10px;
 }
@@ -49,11 +54,6 @@ x-appbar i {
 .show-list .new-series-list-img {
   height: 150px;
   width: 100px;
-}
-
-.show-list .series-list-img {
-  height: 90px;
-  width: 60px;
 }
 
 #show-list li p {
