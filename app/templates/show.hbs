@@ -1,13 +1,13 @@
-<div class="show-list-outer">
-  <ul class="show-list">
+<section data-type="list">
+  <ul>
 {{#each model.seasons as |season|}}
-    {{#link-to 'season' model.showID season.number}}
     <li>
-      <h3>Season {{season.number}}</h3>
+      {{#link-to 'season' model.showID season.number}}
+      <p>Season {{season.number}}</p>
+      {{/link-to}}
     </li>
-    {{/link-to}}
 {{/each}}
-  </ul>
-</div>
+</ul>
+</section>
 
 {{outlet}}
