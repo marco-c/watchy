@@ -19,7 +19,7 @@ x-appbar i {
 * {margin: 0; padding: 0;}
 
 .show-list-outer {
-  margin: 20px;
+  margin-top: 10px;
 }
 
 .show-list {
@@ -39,7 +39,6 @@ x-appbar i {
 
 .show-list li:hover {
   background: #eee;
-  cursor: pointer;
 }
 
 .show-list li img {
