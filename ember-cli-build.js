@@ -52,6 +52,43 @@ module.exports = function(defaults) {
     destDir: 'assets/input_areas/images'
   });
   app.import('vendor/gaia-2.0-bb/lists.css');
+  app.import('vendor/gaia-2.0-bb/progress_activity.css');
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/activity.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/activity@1.5x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/activity@2.25x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/activity@2x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/default.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/default@1.5x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/default@2.25x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/default@2x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/light.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/light@1.5x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/light@2.25x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
+  app.import('vendor/gaia-2.0-bb/progress_activity/images/ui/light@2x.png', {
+      destDir: 'assets/progress_activity/images/ui'
+  });
   app.import('vendor/gaia-2.0-bb/switches.css');
   app.import('vendor/gaia-2.0-bb/switches/images/check/default.png', {
     destDir: 'assets/switches/images/check'
