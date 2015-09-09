@@ -40,20 +40,18 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.serviceWorker = {
+      enabled: true,
+      serviceWorkerFile: "service-worker.js",
+      excludePaths: [
+        'robots.txt',
+        'crossdomain.xml',
+      ],
+      includePaths: ['/'],
+      fallback: [],
+      dynamicCache: []
+    };
   }
-
-  ENV.serviceWorker = {
-    enabled: true,
-    serviceWorkerFile: "service-worker.js",
-    excludePaths: [
-      'robots.txt',
-      'crossdomain.xml',
-    ],
-    includePaths: ['/'],
-    fallback: [],
-    dynamicCache: []
-  };
 
   return ENV;
 };
