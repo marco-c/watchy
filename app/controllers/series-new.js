@@ -9,6 +9,8 @@ export default Ember.Controller.extend({
   results: null,
 
   search: function() {
+    var searchQuery = document.getElementById("search-query").value;
+
     var _this = this;
 
     var series = new Series();
@@ -23,7 +25,7 @@ export default Ember.Controller.extend({
       var request = new XMLHttpRequest({ mozSystem: true });
       request.responseType = "json";
 
-      request.open('GET', 'https://api-v2launch.trakt.tv/shows/trending');
+      request.open('GET', 'https://api-v2launch.trakt.tv/search?query=' + searchQuery + '&type=show');
 
       request.setRequestHeader('Content-Type', 'application/json');
       request.setRequestHeader('trakt-api-version', '2');
