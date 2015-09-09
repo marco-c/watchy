@@ -46,7 +46,10 @@ module.exports = function(environment) {
   ENV.serviceWorker = {
     enabled: true,
     serviceWorkerFile: "service-worker.js",
-    excludePaths: [],
+    excludePaths: [
+      'robots.txt',
+      'crossdomain.xml',
+    ],
     includePaths: ['/'],
     fallback: [],
     dynamicCache: []
