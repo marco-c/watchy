@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
     this.set('isSearching', true);
 
     return new Promise(function(resolve, reject) {
-      var request = new XMLHttpRequest({ mozSystem: true });
+      var request = new XMLHttpRequest();
       request.responseType = "json";
 
       request.open('GET', 'https://api-v2launch.trakt.tv/search?query=' + searchQuery + '&type=show');
@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
     }).then(function(shows) {
       return Promise.all(shows.map(function(show) {
         return new Promise(function(resolve, reject) {
-          var request = new XMLHttpRequest({ mozSystem: true });
+          var request = new XMLHttpRequest();
           request.responseType = "json";
 
           request.open('GET', 'https://api-v2launch.trakt.tv/shows/' + show.show.ids.trakt + '?extended=full,images');
@@ -78,7 +78,7 @@ export default Ember.Controller.extend({
       var _this = this;
 
       if (window.confirm("Add " + show.title + " to your list?")) {
-        var request = new XMLHttpRequest({ mozSystem: true });
+        var request = new XMLHttpRequest();
         request.responseType = "json";
 
         request.open('GET', 'https://api-v2launch.trakt.tv/shows/' + show.ids.trakt + '/seasons?extended=episodes');
