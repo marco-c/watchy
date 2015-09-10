@@ -37,6 +37,6 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
     "ember-localforage-adapter": "1.13.0",
-    "broccoli-serviceworker": "https://github.com/marco-c/broccoli-serviceworker/tarball/12814a73681023e8aa9ab4c909958d07f6f2e062"
+    "broccoli-serviceworker": "https://github.com/marco-c/broccoli-serviceworker/tarball/0d0dff65f4c533c0ea6f5600e9dc7e1d41f4d27e"
   }
 }
