@@ -1,9 +1,9 @@
 <section data-type="list">
   <ul>
-{{#each model.seasons as |season|}}
+{{#each model.computedSeasons as |season|}}
     <li>
       {{#link-to 'season' model.showID season.number}}
-      <p>Season {{season.number}}</p>
+      <p>{{season.computedName}}</p>
       <progress value="{{season.episodesWatched}}" max="{{season.episodesNum}}"></progress>
       {{/link-to}}
     </li>
