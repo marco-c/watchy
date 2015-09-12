@@ -14,7 +14,9 @@
   <ul class="show-list">
     {{#each results as |show|}}
       <li>
-        <img src="{{show.images.poster.thumb}}" class="new-series-list-img">
+        {{#if show.image}}
+        <img src="{{show.image}}" class="new-series-list-img">
+        {{/if}}
         <h3>{{show.title}} ({{show.rating}})</h3>
         <p>{{show.overview}}</p>
         {{#unless show.isInDB}}
