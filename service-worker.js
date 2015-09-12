@@ -1,5 +1,5 @@
 importScripts('serviceworker-cache-polyfill.js');
-var CACHE_VERSION = '1441851187016';
+var CACHE_VERSION = '1442068654178';
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
@@ -27,13 +27,13 @@ self.addEventListener('install', function(event) {
 'assets/progress_activity/images/ui/light@2.25x-fbdbc30ac02d98e33445f31335b33915.png',
 'assets/progress_activity/images/ui/light@2x-b85ef9e49f1ea5e9c83c2023fc4bddc4.png',
 'assets/series-manager-75d5cedfdd3528054be967568c227cf1.css',
-'assets/series-manager-b4a380a8b99ff3a296bd9f0f6f48ac3b.js',
+'assets/series-manager-d0228c7312089937470617f9d6cb3352.js',
 'assets/switches/images/check/default-b4a50b0c3cfe231b3b16a844536f4359.png',
 'assets/switches/images/check/default@1.5x-91d7069fa4cf35e9fd82bbd8b4db3dc2.png',
 'assets/switches/images/check/default@2.25x-4ae0acbafb02ad10d2020351db3d2e2c.png',
 'assets/switches/images/check/default@2x-2442595ce8d2a2773de9fd2ac1c0c21d.png',
 'assets/vendor-900e1ccc0836ac1206026c77fc39c3d6.css',
-'assets/vendor-9401b1b49f640872b08f8f4b46f87d44.js',
+'assets/vendor-ae58206e261fb0447a982dc26fa3cf54.js',
 'fonts/fontawesome-webfont.woff',
 'index.html'
 ];
