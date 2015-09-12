@@ -13,6 +13,11 @@ export default Ember.Route.extend({
               var episodePromises = [];
 
               seasons.forEach(function(season) {
+                // We don't want to show special episodes in the show list.
+                if (season.get('number') === 0) {
+                  return;
+                }
+
                 episodePromises.push(season.get("episodes").then(function(episodes) {
                   return episodes.find(function(episode) {
                     if (episode.get("watched") === false) {
