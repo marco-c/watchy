@@ -19,8 +19,8 @@ x-appbar i {
 * {margin: 0; padding: 0;}
 
 .series-list-img {
-  height: 90px !important;
-  width: 60px !important;
+  max-height: 90px !important;
+  max-width: 60px !important;
 }
 
 .show-list-outer {

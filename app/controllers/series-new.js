@@ -106,7 +106,7 @@ export default Ember.Controller.extend({
               title: show.title,
               overview: show.overview,
               rating: show.rating,
-              image: show.images.poster.thumb,
+              image: show.image,
               traktID: show.ids.trakt,
               seasons: seasons,
               status: show.status,
