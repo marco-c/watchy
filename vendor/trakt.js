@@ -43,9 +43,19 @@ var Trakt = (function() {
     return request(url);
   }
 
+  function getEpisode(traktID, seasonNumber, episodeNumber, extended) {
+    var url = 'https://api-v2launch.trakt.tv/shows/' + traktID + '/seasons/' + seasonNumber + '/episodes/' + episodeNumber;
+    if (extended) {
+      url += '?extended=' + extended;
+    }
+
+    return request(url);
+  }
+
   return {
     search: search,
     getShow: getShow,
     getSeasons: getSeasons,
+    getEpisode: getEpisode,
   };
 })();

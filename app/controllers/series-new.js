@@ -71,17 +71,22 @@ export default Ember.Controller.extend({
 
 
             for (var i = 0; i < traktSeasons.length; i++) {
-              var episodes = [];
+              var episodePromises = [];
 
               var traktEpisodes = traktSeasons[i].episodes;
               for (var j = 0; j < traktEpisodes.length; j++) {
-                episodes.push(_this.store.createRecord('episode', {
-                  number: traktEpisodes[j].number,
-                  title: traktEpisodes[j].title,
+                episodePromises.push(Trakt.getEpisode(show.ids.trakt, traktSeasons[i].number, traktEpisodes[j].number, 'full').then(function(episode) {
+                  return _this.store.createRecord('episode', {
+                    number: episode.number,
+                    title: episode.title,
+                    description: episode.overview,
+                    aired_date: new Date(episode.first_aired),
+                    rating: episode.rating,
+                  }).save();
                 }));
               }
 
-              Promise.all(episodes.map(function(episode) { return episode.save(); })).then(addSeason.bind(null, traktSeasons[i].number, episodes));
+              Promise.all(episodePromises).then(addSeason.bind(null, traktSeasons[i].number));
             }
           });
 

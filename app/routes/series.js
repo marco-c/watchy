@@ -29,7 +29,7 @@ export default Ember.Route.extend({
                 var episode = episodes.find(episode => episode);
                 if (episode) {
                   show.nextEpisodeText = episode.seasonNumber + "x" + episode.get("number") + " - " + episode.get("title");
-                  show.nextEpisodeDate = episode.get("date");
+                  show.nextEpisodeDate = episode.get("aired_date");
                 } else {
                   show.nextEpisodeText = show.get("status");
                   show.nextEpisodeDate = "";
