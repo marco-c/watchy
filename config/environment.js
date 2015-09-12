@@ -41,6 +41,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.baseURL = 'watchy/';
+    ENV.locationType = 'hash';
 
     ENV.serviceWorker = {
       enabled: true,
