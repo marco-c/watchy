@@ -23,6 +23,8 @@ module.exports = function(defaults) {
   app.import('bower_components/font-awesome/css/font-awesome.css');
   //app.import('bower_components/normalize-css/normalize.css');
 
+  app.import('vendor/trakt.js');
+
   app.import('vendor/gaia-2.0-bb/input_areas.css');
   app.import('vendor/gaia-2.0-bb/input_areas/images/clear.svg', {
     destDir: 'assets/input_areas/images'

@@ -21,49 +21,19 @@ export default Ember.Controller.extend({
 
     this.set('isSearching', true);
 
-    return new Promise(function(resolve, reject) {
-      var request = new XMLHttpRequest();
-      request.responseType = "json";
+    return Trakt.search(searchQuery, 'show').then(function(results) {
+      return Promise.all(results.map(function(result) {
+        return Trakt.getShow(result.show.ids.trakt, 'full,images').then(function(details) {
 
-      request.open('GET', 'https://api-v2launch.trakt.tv/search?query=' + searchQuery + '&type=show');
-
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.setRequestHeader('trakt-api-version', '2');
-      request.setRequestHeader('trakt-api-key', Ember.TRAKT_API_KEY);
-
-      request.onload = function() {
-        console.log(request.response);
-        resolve(request.response);
-      };
-
-      request.send();
-    }).then(function(shows) {
-      return Promise.all(shows.map(function(show) {
-        return new Promise(function(resolve, reject) {
-          var request = new XMLHttpRequest();
-          request.responseType = "json";
-
-          request.open('GET', 'https://api-v2launch.trakt.tv/shows/' + show.show.ids.trakt + '?extended=full,images');
-
-          request.setRequestHeader('Content-Type', 'application/json');
-          request.setRequestHeader('trakt-api-version', '2');
-          request.setRequestHeader('trakt-api-key', Ember.TRAKT_API_KEY);
-
-          request.onload = function() {
-            console.log(request.response);
-            var details = request.response;
-            _this.store.query("series", { traktID: details.ids.trakt }).then(function(shows) {
-              if (shows.get("length") > 0) {
-                details.isInDB = true;
-              }
-              resolve(details);
-            }, function(err) {
-              console.log(err);
-              resolve(details);
-            });
-          };
-
-          request.send();
+          return _this.store.query("series", { traktID: details.ids.trakt }).then(function(shows) {
+            if (shows.get("length") > 0) {
+              details.isInDB = true;
+            }
+            return details;
+          }, function(err) {
+            console.log(err);
+            return details;
+          });
         });
       })).then(function(results) {
         _this.set('isSearching', false);
@@ -78,19 +48,7 @@ export default Ember.Controller.extend({
       var _this = this;
 
       if (window.confirm("Add " + show.title + " to your list?")) {
-        var request = new XMLHttpRequest();
-        request.responseType = "json";
-
-        request.open('GET', 'https://api-v2launch.trakt.tv/shows/' + show.ids.trakt + '/seasons?extended=episodes');
-
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.setRequestHeader('trakt-api-version', '2');
-        request.setRequestHeader('trakt-api-key', Ember.TRAKT_API_KEY);
-
-        request.onload = function() {
-          console.log(request.response);
-
-          var traktSeasons = request.response;
+        Trakt.getSeasons(show.ids.trakt, 'episodes').then(function(traktSeasons) {
           var seasonsLeft = traktSeasons.length;
 
           var seasons = [];
@@ -140,9 +98,7 @@ export default Ember.Controller.extend({
             });
             series.save().then(function() { window.alert("Show added"); });
           });
-        };
-
-        request.send();
+        });
       }
     }
   }
