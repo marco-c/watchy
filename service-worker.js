@@ -1,5 +1,5 @@
 importScripts('serviceworker-cache-polyfill.js');
-var CACHE_VERSION = '1442068654178';
+var CACHE_VERSION = '1442077559581';
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };
@@ -26,8 +26,8 @@ self.addEventListener('install', function(event) {
 'assets/progress_activity/images/ui/light@1.5x-685547a63d588353189a92ff105da71e.png',
 'assets/progress_activity/images/ui/light@2.25x-fbdbc30ac02d98e33445f31335b33915.png',
 'assets/progress_activity/images/ui/light@2x-b85ef9e49f1ea5e9c83c2023fc4bddc4.png',
-'assets/series-manager-75d5cedfdd3528054be967568c227cf1.css',
-'assets/series-manager-d0228c7312089937470617f9d6cb3352.js',
+'assets/series-manager-a96e09001b9fc5cfe6448d0b88941252.css',
+'assets/series-manager-fdcc71774b8536d82a24b78b12b73d32.js',
 'assets/switches/images/check/default-b4a50b0c3cfe231b3b16a844536f4359.png',
 'assets/switches/images/check/default@1.5x-91d7069fa4cf35e9fd82bbd8b4db3dc2.png',
 'assets/switches/images/check/default@2.25x-4ae0acbafb02ad10d2020351db3d2e2c.png',
