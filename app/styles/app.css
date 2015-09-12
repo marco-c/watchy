@@ -52,8 +52,8 @@ x-appbar i {
 }
 
 .show-list .new-series-list-img {
-  height: 150px;
-  width: 100px;
+  max-height: 150px;
+  max-width: 100px;
 }
 
 #show-list li p {
