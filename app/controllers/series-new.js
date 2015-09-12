@@ -24,6 +24,17 @@ export default Ember.Controller.extend({
     return Trakt.search(searchQuery, 'show').then(function(results) {
       return Promise.all(results.map(function(result) {
         return Trakt.getShow(result.show.ids.trakt, 'full,images').then(function(details) {
+          // Preferably use the poster, otherwise any other type of image works.
+          if (details.images.poster.thumb) {
+            details.image = details.images.poster.thumb;
+          } else {
+            for (var type in details.images) {
+              if (details.images[type].thumb) {
+                details.image = details.images[type].thumb;
+                break;
+              }
+            }
+          }
 
           return _this.store.query("series", { traktID: details.ids.trakt }).then(function(shows) {
             if (shows.get("length") > 0) {
