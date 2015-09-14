@@ -1,7 +1,8 @@
 importScripts('serviceworker-cache-polyfill.js');
-var CACHE_VERSION = '1442077559581';
+var CACHE_VERSION = '1442244088799';
 var CURRENT_CACHES = {
-  prefetch: 'prefetch-cache-v' + CACHE_VERSION
+  prefetch: 'prefetch-cache-v' + CACHE_VERSION,
+  custom: 'custom',
 };
 self.addEventListener('install', function(event) {
   var urlsToPrefetch = [
@@ -26,8 +27,8 @@ self.addEventListener('install', function(event) {
 'assets/progress_activity/images/ui/light@1.5x-685547a63d588353189a92ff105da71e.png',
 'assets/progress_activity/images/ui/light@2.25x-fbdbc30ac02d98e33445f31335b33915.png',
 'assets/progress_activity/images/ui/light@2x-b85ef9e49f1ea5e9c83c2023fc4bddc4.png',
+'assets/series-manager-4eff78b17069af9dcbd25dfdd2dcba8e.js',
 'assets/series-manager-a96e09001b9fc5cfe6448d0b88941252.css',
-'assets/series-manager-fdcc71774b8536d82a24b78b12b73d32.js',
 'assets/switches/images/check/default-b4a50b0c3cfe231b3b16a844536f4359.png',
 'assets/switches/images/check/default@1.5x-91d7069fa4cf35e9fd82bbd8b4db3dc2.png',
 'assets/switches/images/check/default@2.25x-4ae0acbafb02ad10d2020351db3d2e2c.png',
@@ -73,9 +74,6 @@ console.log('Deleting out of date cache:', cacheName);
   );
 });
 self.addEventListener('fetch', function(event) {
-  if (new URL(event.request.url).origin !== new URL(self.location).origin) {
-    return;
-  }
 console.log('Handling fetch event for', event.request.url);
 console.log('Looking in caches for:', event.request.url);
   event.respondWith(
@@ -83,10 +81,10 @@ console.log('Looking in caches for:', event.request.url);
     // It's an alternative to first opening a specific named cache and then matching on that.
     caches.match(event.request).then(function(response) {
       if (response) {
-console.log('Found response in cache:', response);
+console.log('Found response in cache for ' + event.request.url + ':', response);
         return response;
       }
-console.log('No response found in cache. About to fetch from network:'+event.request);
+console.log('No response found in cache for ' + event.request.url + '. About to fetch from network:'+event.request);
       // event.request will always have the proper mode set ('cors, 'no-cors', etc.) so we don't
       // have to hardcode 'no-cors' like we do when fetch()ing in the install handler.
       return fetch(event.request).then(function(response) {
@@ -96,7 +94,7 @@ console.log('Response from network is:', response);
         // This catch() will handle exceptions thrown from the fetch() operation.
         // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
         // It will return a normal response object that has the appropriate error code set.
-        console.error('Fetching failed:', error);
+        console.error('Fetching failed for ' + event.request.url + ':', error);
         throw error;
       });
     })
