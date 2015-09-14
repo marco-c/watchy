@@ -112,7 +112,14 @@ export default Ember.Controller.extend({
               status: show.status,
               runtime: show.runtime,
             });
-            series.save().then(function() { window.alert("Show added"); });
+
+            window.caches.open('custom').then(function(cache) {
+              cache.add(new Request(show.image, { mode: 'no-cors' })).then(function() {
+                series.save().then(function() {
+                  window.alert("Show added");
+                });
+              });
+            });
           });
         });
       }
