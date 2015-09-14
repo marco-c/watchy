@@ -42,19 +42,18 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.baseURL = 'watchy/';
     ENV.locationType = 'hash';
-
-    ENV.serviceWorker = {
-      enabled: true,
-      serviceWorkerFile: "service-worker.js",
-      excludePaths: [
-        'robots.txt',
-        'crossdomain.xml',
-      ],
-      includePaths: ['/'],
-      fallback: [],
-      dynamicCache: []
-    };
   }
+
+  ENV.serviceWorker = {
+    enabled: true,
+    serviceWorkerFile: "service-worker.js",
+    excludePaths: [
+      'robots.txt',
+      'crossdomain.xml',
+    ],
+    includePaths: ['/'],
+    customCache: true,
+  };
 
   return ENV;
 };
