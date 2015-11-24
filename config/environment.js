@@ -52,7 +52,6 @@ module.exports = function(environment) {
       'crossdomain.xml',
     ],
     includePaths: ['/'],
-    customCache: true,
   };
 
   return ENV;
