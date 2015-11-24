@@ -1,42 +1,44 @@
 importScripts('serviceworker-cache-polyfill.js');
-var CACHE_VERSION = '1442244088799';
+var CACHE_VERSION = '1448370560172';
+var CACHE_PREFIXES = [
+  'prefetch-cache-v',
+];
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + CACHE_VERSION,
-  custom: 'custom',
 };
 self.addEventListener('install', function(event) {
   var urlsToPrefetch = [
-'assets/input_areas/images/clear.svg',
-'assets/input_areas/images/clear_dark.svg',
-'assets/input_areas/images/dialog.svg',
-'assets/input_areas/images/dialog_active.svg',
-'assets/input_areas/images/dialog_disabled.svg',
-'assets/input_areas/images/dialog_disabled_rtl.svg',
-'assets/input_areas/images/dialog_rtl.svg',
-'assets/input_areas/images/search.svg',
-'assets/input_areas/images/search_dark.svg',
-'assets/progress_activity/images/ui/activity-ac12e4dc031d6afb5bb562564c3be861.png',
-'assets/progress_activity/images/ui/activity@1.5x-eaf9553a5afb38b39b6441a274af14f3.png',
-'assets/progress_activity/images/ui/activity@2.25x-d75e3ef505d7b0652b2406adea5259e6.png',
-'assets/progress_activity/images/ui/activity@2x-bc93a9943c43b49c5a302e25e209f5a6.png',
-'assets/progress_activity/images/ui/default-6c37279a91665eb23a8bdc820063fd29.png',
-'assets/progress_activity/images/ui/default@1.5x-fc23a75ba3449bdd091acb0e28256d25.png',
-'assets/progress_activity/images/ui/default@2.25x-6b30a698b790c6a9baa8cc56bed7b264.png',
-'assets/progress_activity/images/ui/default@2x-44c79c15ebf43dd159922eb0b95aea17.png',
-'assets/progress_activity/images/ui/light-4eba569f7e5925a0d7ee8e457bbcce79.png',
-'assets/progress_activity/images/ui/light@1.5x-685547a63d588353189a92ff105da71e.png',
-'assets/progress_activity/images/ui/light@2.25x-fbdbc30ac02d98e33445f31335b33915.png',
-'assets/progress_activity/images/ui/light@2x-b85ef9e49f1ea5e9c83c2023fc4bddc4.png',
-'assets/series-manager-4eff78b17069af9dcbd25dfdd2dcba8e.js',
-'assets/series-manager-a96e09001b9fc5cfe6448d0b88941252.css',
-'assets/switches/images/check/default-b4a50b0c3cfe231b3b16a844536f4359.png',
-'assets/switches/images/check/default@1.5x-91d7069fa4cf35e9fd82bbd8b4db3dc2.png',
-'assets/switches/images/check/default@2.25x-4ae0acbafb02ad10d2020351db3d2e2c.png',
-'assets/switches/images/check/default@2x-2442595ce8d2a2773de9fd2ac1c0c21d.png',
-'assets/vendor-900e1ccc0836ac1206026c77fc39c3d6.css',
-'assets/vendor-ae58206e261fb0447a982dc26fa3cf54.js',
-'fonts/fontawesome-webfont.woff',
-'index.html'
+    'assets/input_areas/images/clear.svg',
+    'assets/input_areas/images/clear_dark.svg',
+    'assets/input_areas/images/dialog.svg',
+    'assets/input_areas/images/dialog_active.svg',
+    'assets/input_areas/images/dialog_disabled.svg',
+    'assets/input_areas/images/dialog_disabled_rtl.svg',
+    'assets/input_areas/images/dialog_rtl.svg',
+    'assets/input_areas/images/search.svg',
+    'assets/input_areas/images/search_dark.svg',
+    'assets/progress_activity/images/ui/activity-ac12e4dc031d6afb5bb562564c3be861.png',
+    'assets/progress_activity/images/ui/activity@1.5x-eaf9553a5afb38b39b6441a274af14f3.png',
+    'assets/progress_activity/images/ui/activity@2.25x-d75e3ef505d7b0652b2406adea5259e6.png',
+    'assets/progress_activity/images/ui/activity@2x-bc93a9943c43b49c5a302e25e209f5a6.png',
+    'assets/progress_activity/images/ui/default-6c37279a91665eb23a8bdc820063fd29.png',
+    'assets/progress_activity/images/ui/default@1.5x-fc23a75ba3449bdd091acb0e28256d25.png',
+    'assets/progress_activity/images/ui/default@2.25x-6b30a698b790c6a9baa8cc56bed7b264.png',
+    'assets/progress_activity/images/ui/default@2x-44c79c15ebf43dd159922eb0b95aea17.png',
+    'assets/progress_activity/images/ui/light-4eba569f7e5925a0d7ee8e457bbcce79.png',
+    'assets/progress_activity/images/ui/light@1.5x-685547a63d588353189a92ff105da71e.png',
+    'assets/progress_activity/images/ui/light@2.25x-fbdbc30ac02d98e33445f31335b33915.png',
+    'assets/progress_activity/images/ui/light@2x-b85ef9e49f1ea5e9c83c2023fc4bddc4.png',
+    'assets/series-manager-86896ea50358e9bab18df32d95e28ca3.js',
+    'assets/series-manager-a96e09001b9fc5cfe6448d0b88941252.css',
+    'assets/switches/images/check/default-b4a50b0c3cfe231b3b16a844536f4359.png',
+    'assets/switches/images/check/default@1.5x-91d7069fa4cf35e9fd82bbd8b4db3dc2.png',
+    'assets/switches/images/check/default@2.25x-4ae0acbafb02ad10d2020351db3d2e2c.png',
+    'assets/switches/images/check/default@2x-2442595ce8d2a2773de9fd2ac1c0c21d.png',
+    'assets/vendor-900e1ccc0836ac1206026c77fc39c3d6.css',
+    'assets/vendor-ae58206e261fb0447a982dc26fa3cf54.js',
+    'fonts/fontawesome-webfont.woff',
+    'index.html'
 ];
 urlsToPrefetch.push('/');
 console.log('Handling install event. Resources to pre-fetch:', urlsToPrefetch);
@@ -53,21 +55,17 @@ console.log('All resources have been fetched and cached.');
   );
 });
 self.addEventListener('activate', function(event) {
-  // Delete all caches that aren't named in CURRENT_CACHES.
-  // While there is only one cache in this example, the same logic will handle the case where
-  // there are multiple versioned caches.
-  var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
-    return CURRENT_CACHES[key];
-  });
+  // Delete all caches handled by broccoli-serviceworker.
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (expectedCacheNames.indexOf(cacheName) === -1) {
-            // If this cache name isn't present in the array of "expected" cache names, then delete it.
+        cacheNames.filter(function(cacheName) {
+          return CACHE_PREFIXES.findIndex(function(cachePrefix) {
+            return cacheName.indexOf(cachePrefix) === 0;
+          }) !== -1;
+        }).map(function(cacheName) {
 console.log('Deleting out of date cache:', cacheName);
             return caches.delete(cacheName);
-          }
         })
       );
     })
